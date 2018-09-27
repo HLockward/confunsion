@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 
 
-const RenderComments = ({comments}) => {
+const RenderComments = ({comments,addComment,dishId}) => {
     if(comments != null){
         return(
             <div className="col-12 col-md-5 m-1">
@@ -19,7 +19,7 @@ const RenderComments = ({comments}) => {
                         </div>
                     )}
                 </ul>
-                <CommentForm/>
+                <CommentForm addComment={addComment} dishId={dishId}/>
             </div>
         );
     }else{
@@ -49,7 +49,7 @@ const RenderDish = ({dish}) => {
     }
 }
 
-const DishDetails = ({dish,comments}) =>{
+const DishDetails = ({dish,comments,addComment}) =>{
     
     return(
         <div className="container">
@@ -65,7 +65,7 @@ const DishDetails = ({dish,comments}) =>{
             </div>
             <div className="row">
                 <RenderDish dish={dish} />
-                <RenderComments comments={comments} />
+                <RenderComments comments={comments} addComment={addComment} dishId={dish.id}/>
             </div>
         </div>
     );
