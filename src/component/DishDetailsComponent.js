@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
+import { Loading } from './LoadingComponent';
 
 
 const RenderComments = ({comments,addComment,dishId}) => {
@@ -49,26 +50,44 @@ const RenderDish = ({dish}) => {
     }
 }
 
-const DishDetails = ({dish,comments,addComment}) =>{
-    
-    return(
-        <div className="container">
-            <div className="row">
-                <Breadcrumb>
-                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
-                </Breadcrumb>
-                <div className="col-12">
-                    <h3>{dish.name}</h3>
-                    <hr />
-                </div>                
+const DishDetails = ({dish,comments,addComment,isLoading,errMess}) =>{
+    if (isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
             </div>
-            <div className="row">
-                <RenderDish dish={dish} />
-                <RenderComments comments={comments} addComment={addComment} dishId={dish.id}/>
+        );
+    }
+    else if (errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{errMess}</h4>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+    else
+        return(
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{dish.name}</h3>
+                        <hr />
+                    </div>                
+                </div>
+                <div className="row">
+                    <RenderDish dish={dish} />
+                    <RenderComments comments={comments} addComment={addComment} dishId={dish.id}/>
+                </div>
+            </div>
+        );
     
 };
 
