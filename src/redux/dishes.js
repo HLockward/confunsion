@@ -15,7 +15,7 @@ action) => {
             return {...state, isLoading : true, errorMessage : null, dishes: []};
             
         case actionTypes.DISHES_FAILED:
-            return {...state, isLoading : false, errorMessage : action.payload, dishes: []}
+            return {...state, isLoading : false, errorMessage : action.payload}
 
         default:
           return state;
