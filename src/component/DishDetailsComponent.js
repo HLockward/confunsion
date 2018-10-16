@@ -6,7 +6,7 @@ import { Loading } from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
 
 
-const RenderComments = ({comments,addComment,dishId}) => {
+const RenderComments = ({comments,postComment,dishId}) => {
     if(comments != null){
         return(
             <div className="col-12 col-md-5 m-1">
@@ -21,7 +21,7 @@ const RenderComments = ({comments,addComment,dishId}) => {
                         </div>
                     )}
                 </ul>
-                <CommentForm addComment={addComment} dishId={dishId}/>
+                <CommentForm postComment={postComment} dishId={dishId}/>
             </div>
         );
     }else{
@@ -51,7 +51,7 @@ const RenderDish = ({dish}) => {
     }
 }
 
-const DishDetails = ({dish,comments,addComment,isLoading,errMess}) =>{
+const DishDetails = ({dish,comments,postComment,isLoading,errMess}) =>{
     if (isLoading) {
         return(
             <div className="container">
@@ -85,7 +85,7 @@ const DishDetails = ({dish,comments,addComment,isLoading,errMess}) =>{
                 </div>
                 <div className="row">
                     <RenderDish dish={dish} />
-                    <RenderComments comments={comments} addComment={addComment} dishId={dish.id}/>
+                    <RenderComments comments={comments} postComment={postComment} dishId={dish.id}/>
                 </div>
             </div>
         );
