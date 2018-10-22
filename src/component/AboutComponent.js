@@ -2,6 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
 const RenderLeader = ({leader}) =>{
     return(
@@ -18,15 +19,32 @@ const RenderLeader = ({leader}) =>{
     );
 };
 
-function About(props) {
-
-    const leaders =  props.leaders.map((leader) => {
+const Leaders = ({leaders,leadersLoading,leadersErrMess}) =>{
+    if (leadersLoading) {
+        return(
+            <Loading />
+        );
+    }
+    else if (leadersErrMess) {
+        return(
+            <h4>{leadersErrMess}</h4>
+        );
+    }
+    else {
+        const renderLeaders = leaders.map((leader) => {
             return (
-                <RenderLeader key={leader.id} leader={leader} />
-            )
+                    <RenderLeader key={leader.id} leader={leader} />
+            );
         });
+        return(
+            <div>
+                {renderLeaders}
+            </div>
+        );    
+    }
+};
 
-    
+function About(props) {
 
     return(
         <div className="container">
@@ -84,7 +102,7 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                        <Leaders leaders={props.leaders} leadersLoading={props.leadersLoading} leadersErrMess={props.leadersErrMess}/>
                     </Media>
                 </div>
             </div>
