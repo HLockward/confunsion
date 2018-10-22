@@ -3,17 +3,24 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const RenderLeader = ({leader}) =>{
     return(
         <Media tag="li">
-            <Media left middle>
-                <Media object src={baseUrl + leader.image} alt={leader.name} />
-            </Media>
+            <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                <Media left middle>
+                    <Media object src={baseUrl + leader.image} alt={leader.name} />
+                </Media>
+            </FadeTransform>
             <Media body className="ml-5">
-            <Media className="mb-2" heading>{leader.name}</Media>
-            <Media className="mb-3">{leader.designation}</Media>
-            <p>{leader.description}</p>
+                <Media className="mb-2" heading>{leader.name}</Media>
+                <Media className="mb-3">{leader.designation}</Media>
+                <p>{leader.description}</p>
             </Media>
         </Media>
     );
@@ -30,15 +37,16 @@ const Leaders = ({leaders,leadersLoading,leadersErrMess}) =>{
             <h4>{leadersErrMess}</h4>
         );
     }
-    else {
-        const renderLeaders = leaders.map((leader) => {
-            return (
-                    <RenderLeader key={leader.id} leader={leader} />
-            );
-        });
+    else { 
         return(
             <div>
-                {renderLeaders}
+                <Stagger in> 
+                    {leaders.map((leader) => 
+                        <Fade in>
+                            <RenderLeader key={leader.id} leader={leader} />
+                        </Fade>
+                    )}  
+                </Stagger>
             </div>
         );    
     }
