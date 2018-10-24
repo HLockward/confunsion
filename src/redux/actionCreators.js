@@ -220,7 +220,7 @@ export const postFeedback = ({firstname,lastname,telnum,email,agree,contactType,
             throw error;
       })
     .then(response => response.json())
-    .then(response => dispatch(addFeedback(response)))
+    .then(response => {dispatch(addFeedback(response)); alert(JSON.stringify(response)); })
     .catch(error =>  { console.log('post feedbacks', error.message); 
     alert('Your feedback could not be posted\nError: '+error.message); });
 };
