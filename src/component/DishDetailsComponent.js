@@ -96,7 +96,7 @@ const DishDetails = ({dish,comments,postComment,isLoading,errMess}) =>{
                 </div>
                 <div className="row">
                     <RenderDish dish={dish} />
-                    <RenderComments comments={comments} postComment={postComment} dishId={dish.id}/>
+                    <RenderComments comments={comments} postComment={postComment} dishId={dish._id}/>
                 </div>
             </div>
         );

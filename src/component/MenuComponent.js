@@ -9,9 +9,9 @@ const Menu = ({dishes}) =>{
 
     const menu = dishes.dishes.map((dish) => {
         return(
-            <div key={dish.id} className='col-12 col-md-5 m-1'>
+            <div key={dish._id} className='col-12 col-md-5 m-1'>
                     <Card >
-                        <Link to={`/menu/${dish.id}`} >
+                        <Link to={`/menu/${dish._id}`} >
                             <CardImg width='100%' src={baseUrl + dish.image} alt={dish.name} />
                             <CardImgOverlay className = 'ml-5'>
                             <CardTitle>{dish.name}</CardTitle>

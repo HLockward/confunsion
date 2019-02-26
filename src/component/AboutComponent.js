@@ -42,8 +42,8 @@ const Leaders = ({leaders,leadersLoading,leadersErrMess}) =>{
             <div>
                 <Stagger in> 
                     {leaders.map((leader) => 
-                        <Fade in>
-                            <RenderLeader key={leader.id} leader={leader} />
+                        <Fade in key={leader._id}>
+                            <RenderLeader key={leader._id} leader={leader} />
                         </Fade>
                     )}  
                 </Stagger>
