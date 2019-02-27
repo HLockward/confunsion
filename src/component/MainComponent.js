@@ -8,7 +8,11 @@ import About from './AboutComponent';
 import { Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import DishDetails from './DishDetailsComponent';
 import { connect } from 'react-redux';
-import {postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders, postFeedback} from '../redux/actionCreators';
+import {postFeedback} from '../redux/actions/feedbackActions';
+import {fetchDishes} from '../redux/actions/dishActions';
+import {postComment, fetchComments} from '../redux/actions/commentAction';
+import {fetchPromos} from '../redux/actions/promotionActions';
+import {fetchLeaders} from '../redux/actions/leaderActions'
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
