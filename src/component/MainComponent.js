@@ -12,7 +12,8 @@ import {postFeedback} from '../redux/actions/feedbackActions';
 import {fetchDishes} from '../redux/actions/dishActions';
 import {postComment, fetchComments} from '../redux/actions/commentAction';
 import {fetchPromos} from '../redux/actions/promotionActions';
-import {fetchLeaders} from '../redux/actions/leaderActions'
+import {fetchLeaders} from '../redux/actions/leaderActions';
+import {login} from '../redux/actions/userActions';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -21,7 +22,8 @@ const mapStateToProps = state =>{
         dishes : state.dishes,
         comments : state.comments,
         promotions : state.promotions,
-        leaders : state.leaders
+        leaders : state.leaders,
+        user: state.user
     }
 };
 
@@ -32,7 +34,8 @@ const mapDispatchToProps = (dispatch) => ({
     resetFeedbackForm: () =>{dispatch(actions.reset('feedback'))},
     fetchComments: () => {dispatch(fetchComments())},
     fetchPromos: () => {dispatch(fetchPromos())},
-    fetchLeaders: () => {dispatch(fetchLeaders())}
+    fetchLeaders: () => {dispatch(fetchLeaders())},
+    login: (user) => {dispatch(login(user))}
 });
 
 class Main extends Component {  
@@ -85,7 +88,7 @@ class Main extends Component {
         }
         return (
             <div className="App">
-                <Header />
+                <Header login = {this.props.login} user = {this.props.user.user}/>
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch>
