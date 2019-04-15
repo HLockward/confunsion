@@ -16,7 +16,14 @@ action) => {
             
         case actionTypes.DISHES_FAILED:
             return {...state, isLoading : false, errorMessage : action.payload}
-
+        
+        case actionTypes.ADD_COMMENT:
+            return {...state, isLoading : false, errorMessage : null, 
+                    dishes: [
+                            ...state.dishes.filter(dish => dish._id !== action.payload._id),
+                            action.payload
+                           ]
+                    }
         default:
           return state;
       }

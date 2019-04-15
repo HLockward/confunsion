@@ -36,3 +36,29 @@ export const dishesFailed = (errmess) =>({
     type: ActionTypes.DISHES_FAILED,
     payload: errmess
 });
+
+export const addComment = (comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});
+
+export const postComment = (dishId, comment) => (dispatch, getState) =>{
+    
+    const state = getState();
+    const token = state.user.user.token;
+
+    return fetch(baseUrl + 'dishes/' +  dishId + '/comments', {
+        method: "POST",
+        body: JSON.stringify(comment),
+        headers : {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        credentials: 'same-origin' 
+    })
+    .then(response => response.json())
+    
+    .then(response => dispatch(addComment(response)))
+    .catch(error =>  { console.log('post comments', error.message); 
+    alert('Your comment could not be posted\nError: '+error.message); });
+};

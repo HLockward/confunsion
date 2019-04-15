@@ -9,8 +9,8 @@ import { Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import DishDetails from './DishDetailsComponent';
 import { connect } from 'react-redux';
 import {postFeedback} from '../redux/actions/feedbackActions';
-import {fetchDishes} from '../redux/actions/dishActions';
-import {postComment, fetchComments} from '../redux/actions/commentAction';
+import {fetchDishes,postComment} from '../redux/actions/dishActions';
+import {fetchComments} from '../redux/actions/commentAction';
 import {fetchPromos} from '../redux/actions/promotionActions';
 import {fetchLeaders} from '../redux/actions/leaderActions';
 import {login} from '../redux/actions/userActions';
@@ -57,6 +57,7 @@ class Main extends Component {
                     comments={this.props.comments.comments.filter(comment => comment.dishId === parseInt(match.params.dishId,10))}
                     commentsErrMess={this.props.comments.errorMessage}
                     postComment={this.props.postComment}
+                    user = {this.props.user.user}
                 />
             );
         }

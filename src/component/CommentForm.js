@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
-import {Control, LocalForm, Errors} from 'react-redux-form';
+import {Control, LocalForm} from 'react-redux-form';
 import { Button, Modal, ModalHeader, ModalBody, Label, FormGroup} from 'reactstrap';
-
-const required = (val) => val && val.length;
-const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) => val && (val.length >= len);
 
 class CommentForm extends Component{
     constructor(props){
@@ -23,7 +19,11 @@ class CommentForm extends Component{
     }
 
     handleSubmit(values){
-        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
+        const comment = {
+            rating : values.rating,
+            comment : values.comment
+        };
+        this.props.postComment(this.props.dishId, comment);
     }
 
     render(){
@@ -43,26 +43,6 @@ class CommentForm extends Component{
                                     <option>4</option>
                                     <option>5</option>
                                 </Control.select>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="name">Your Name</Label>
-                                <Control.text model=".name" id="name" name="name" 
-                                    className="form-control" placeholder="Your Name"
-                                    validators = {
-                                        {
-                                            required,minLength: minLength(3), maxLength: maxLength(15)
-                                        }
-                                    }
-                                />
-                                <Errors
-                                    className="text-danger"
-                                    model=".name"
-                                    show="touched"
-                                    messages={{
-                                        required: 'Required ',
-                                        minLength: 'Must be greater than 2 characters ',
-                                        maxLength: 'Must be 15 characters or less '
-                                    }} />
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="comment">Comment</Label>

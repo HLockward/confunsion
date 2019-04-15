@@ -7,7 +7,7 @@ import {baseUrl} from '../shared/baseUrl';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
-const RenderComments = ({comments,postComment,dishId}) => {
+const RenderComments = ({comments,postComment,dishId, user}) => {
     if(comments != null){
         return(
             <div className="col-12 col-md-5 m-1">
@@ -15,18 +15,18 @@ const RenderComments = ({comments,postComment,dishId}) => {
                     <li><h3>Comments</h3></li>
                     <Stagger in>
                         {comments.map(comment =>
-                        <Fade in>
-                            <div key={comment.id}>
+                        <Fade in key={comment._id}>
+                            <div >
                                 <li>{comment.comment}</li>
-                                <br/>
-                                <li>{ `-- ${comment.author} ,`} {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
+                                <li>Rating:{comment.rating}/5</li>
+                                <li>{ `-- ${comment.author.firstname} ${comment.author.lastname}, `} {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.createdAt)))}</li>
                                 <br/>
                             </div>
                         </Fade>
                         )}
                     </Stagger>
                 </ul>
-                <CommentForm postComment={postComment} dishId={dishId}/>
+                {user != null ? <CommentForm postComment={postComment} dishId={dishId}/> : ''}
             </div>
         );
     }else{
@@ -62,7 +62,7 @@ const RenderDish = ({dish}) => {
     }
 }
 
-const DishDetails = ({dish,comments,postComment,isLoading,errMess}) =>{
+const DishDetails = ({dish,postComment,isLoading,errMess,user}) =>{
     if (isLoading) {
         return(
             <div className="container">
@@ -96,7 +96,7 @@ const DishDetails = ({dish,comments,postComment,isLoading,errMess}) =>{
                 </div>
                 <div className="row">
                     <RenderDish dish={dish} />
-                    <RenderComments comments={comments} postComment={postComment} dishId={dish._id}/>
+                    <RenderComments comments={dish.comments} postComment={postComment} dishId={dish._id} user={user}/>
                 </div>
             </div>
         );

@@ -35,23 +35,25 @@ export const addComment = (comment) => ({
     payload: comment
 });
 
-export const postComment = (dishId, rating, author, comment) => (dispatch) =>{
+export const postComment = (dishId, rating,comment) => (dispatch, getState) =>{
+    
+    const state = getState();
+    const token = state.user.token;
     const newComment = {
-        dishId: dishId,
         rating: rating,
-        author: author,
         comment: comment
     };
-    newComment.date = new Date().toISOString();
 
     return fetch(baseUrl + dishId + 'comments', {
         method: "POST",
         body: JSON.stringify(newComment),
         headers : {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         credentials: 'same-origin' 
     })
+    .then(response => response.json())
     .then(response => {
         if (response.ok) {
           return response;
@@ -64,7 +66,6 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) =>{
       error => {
             throw error;
       })
-    .then(response => response.json())
     .then(response => dispatch(addComment(response)))
     .catch(error =>  { console.log('post comments', error.message); 
     alert('Your comment could not be posted\nError: '+error.message); });
