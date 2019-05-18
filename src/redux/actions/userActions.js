@@ -6,6 +6,11 @@ export const loginUser = (user) => ({
     payload: user
 });
 
+export const signInUser = (user) =>({
+    type: ActionTypes.SIGNIN_USER,
+    payload: user
+});
+
 export const login = (user) => (dispatch) => {
 
     return fetch(baseUrl + 'users/login', {
@@ -17,15 +22,33 @@ export const login = (user) => (dispatch) => {
         },
         credentials: 'same-origin'
     })
-    .then(response => response.json())
-    
+    .then(response => response.json())  
     .then(response => {
         if(response.success){
             dispatch(loginUser(response.user)); 
         }
-        alert(response.status);
     })
     .catch(error =>  { console.log('login', error.message); 
     alert('could not login \nError: '+error.message); }); 
 };
 
+export const signIn = (user) => (dispatch) => {
+
+    return fetch(baseUrl + 'users/signup', {
+        method : 'post',
+        body: JSON.stringify(user),
+
+        headers : {
+            "Content-Type": "application/json"
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(response => {
+        if(response.success){
+            dispatch(signInUser(response.user)); 
+        }
+    })
+    .catch(error =>  { console.log('sign in', error.message); 
+    alert('could not sign in \nError: '+error.message); }); 
+};

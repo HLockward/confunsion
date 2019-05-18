@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,} from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,Button} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import {HOME_URL} from '../shared/baseUrl';
 import LoginForm from './loginComponent';
+import SignInForm from './SignInComponent';
 
 class Header extends Component{
     constructor(props) {
@@ -57,11 +58,27 @@ class Header extends Component{
                                 <NavLink className="nav-link" to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
                             </NavItem>
                             </Nav>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    {this.props.user == null ? <LoginForm login = {this.props.login}/> : ''}
-                                </NavItem>
-                            </Nav>
+                            
+                            {this.props.user == null ?
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem className="mr-1">
+                                        <LoginForm login = {this.props.login}/>
+                                    </NavItem>
+                                    <NavItem> 
+                                        <SignInForm signIn = {this.props.signIn}/>
+                                    </NavItem>
+                                </Nav>
+                                :
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem className="mr-1">
+                                        <NavLink className="nav-link" to='#'><span className="fa fa-user fa-lg"></span> {this.props.user.username}</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <Button outline><span className="fa fa-sign-out fa-lg"></span> logout</Button>
+                                    </NavItem>
+                                </Nav>
+                            }
+                            
                         </Collapse>
                     </div>
                 </Navbar>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Control, LocalForm, Errors} from 'react-redux-form';
-import { Button, Modal, ModalHeader, ModalBody, Label, FormGroup} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Label, FormGroup, ModalFooter} from 'reactstrap';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -84,7 +84,10 @@ class LoginForm extends Component{
                                     <strong>Remember me</strong>
                                 </Label>                                
                             </FormGroup>
-                            <Button type="submit" value="submit" color="primary">Login</Button>
+                            <ModalFooter>
+                                <Button type="submit" value="submit" color="primary">Login</Button>
+                                <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                            </ModalFooter>  
                         </LocalForm>
                     </ModalBody>
                 </Modal>

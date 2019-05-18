@@ -7,8 +7,8 @@ export const User = (state = {
 action) => {
     switch (action.type) {
         case ActionTypes.LOGIN_USER :
+        case ActionTypes.SIGNIN_USER :
             return {...state, user: action.payload};
-
         case ActionTypes.COMMENTS_FAILED :
             return {...state, errorMessage: action.payload};
 
