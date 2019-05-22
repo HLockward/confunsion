@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,Button} from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import {HOME_URL} from '../shared/baseUrl';
 import LoginForm from './loginComponent';
 import SignInForm from './SignInComponent';
+import LogoutButton from './LogoutComponent';
 
 class Header extends Component{
     constructor(props) {
@@ -74,7 +75,7 @@ class Header extends Component{
                                         <NavLink className="nav-link" to='#'><span className="fa fa-user fa-lg"></span> {this.props.user.username}</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <Button outline><span className="fa fa-sign-out fa-lg"></span> logout</Button>
+                                        <LogoutButton logout = {this.props.logout}/>
                                     </NavItem>
                                 </Nav>
                             }

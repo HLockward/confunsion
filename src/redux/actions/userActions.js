@@ -11,6 +11,11 @@ export const signInUser = (user) =>({
     payload: user
 });
 
+export const logoutUser = () =>({
+    type: ActionTypes.LOGOUT_USER,
+    payload: null
+});
+
 export const login = (user) => (dispatch) => {
 
     return fetch(baseUrl + 'users/login', {
@@ -52,3 +57,13 @@ export const signIn = (user) => (dispatch) => {
     .catch(error =>  { console.log('sign in', error.message); 
     alert('could not sign in \nError: '+error.message); }); 
 };
+
+export const logout = () => (dispatch) =>{
+    return fetch(baseUrl + 'users/logout')
+    .then(response => response.json())
+    .then((response) =>{
+        dispatch(logoutUser());
+        alert(response.status);
+    })
+    .catch(error =>  console.log('logout', error.message));
+}
