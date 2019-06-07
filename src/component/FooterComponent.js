@@ -7,7 +7,7 @@ function Footer(props) {
             <div className="container">
                 <div className="row justify-content-center"> 
                     <Link to="/home">
-                        <img src='assets/images/logo.png' height="50" width="60" alt='Ristorante Con Fusion' />
+                        <img src='assets/images/logo.png' height="100" width="150" alt='Ristorante Con Fusion' />
                     </Link>
                 </div>
                 <br/>

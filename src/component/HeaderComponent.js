@@ -43,7 +43,7 @@ class Header extends Component{
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href={HOME_URL}><img src='assets/images/logo.png' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
+                        <NavbarBrand className="mr-auto" href={HOME_URL}><img src='assets/images/icon.png' height="40" width="45" alt='Ristorante Con Fusion' /></NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                             <NavItem>
@@ -86,8 +86,11 @@ class Header extends Component{
                 <Jumbotron>
                     <div className="container">
                         <div className="row row-header">
+                            <div className="col-12 col-sm-3">
+                                <img src='assets/images/logo.png' height="150" width="200" alt='RD food' />
+                            </div>
                             <div className="col-12 col-sm-6">
-                                <h1>Ristorante con Fusion</h1>
+                                <h1>Dominican Republic Food</h1>
                                 <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
                             </div>
                         </div>

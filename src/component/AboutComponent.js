@@ -14,7 +14,7 @@ const RenderLeader = ({leader}) =>{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
                 <Media left middle>
-                    <Media object src={baseUrl + leader.image} alt={leader.name} />
+                    <Media object src={baseUrl + leader.image} alt={leader.name} height="110" width="110" />
                 </Media>
             </FadeTransform>
             <Media body className="ml-5">
